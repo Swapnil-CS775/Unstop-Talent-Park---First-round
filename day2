@@ -1,0 +1,276 @@
+1) Given an array {4, 5, 2, 25, 7, 8}, the Next Greater Element (NGE) for each element is the first greater number appearing to its right. Which data structure     
+  provides the most efficient solution?
+
+  1) Brute Force (O(N²))
+  2) Queue (O(N))
+  3) Stack (O(N)) 
+  4) Linked List (O(N log N))
+  
+  Correct --> 3) Stack (O(N)) 
+
+  Explaination - If an element needs the next greater (or smaller) value efficiently → Think Stack!
+
+  Approach Using Stack - 
+    Traverse the array from right to left.
+    Use a stack to store elements for which we are finding the NGE.
+    For each element:
+    Pop elements from the stack that are smaller than or equal to the current element (since they can’t be the NGE).
+    If the stack is not empty, the top of the stack is the Next Greater Element.
+    Push the current element onto the stack for future comparisons.
+
+********************************************************************************************************************************************************************
+  
+2)Which algorithm is best suited for finding the shortest path in a graph with non-negative edge weights?
+  
+  1) Bellman-Ford Algorithm
+  2) Floyd-Warshall Algorithm
+  3) Dijkstra’s Algorithm
+  4) Prim’s Algorithm
+
+  correct --> 3) Dijkstra’s Algorithm
+
+  Explaination -->
+
+  Bellman-Ford (O(VE)) → Works with negative weights but is slower. ❌
+  Floyd-Warshall (O(V³)) → All-pairs shortest paths, inefficient for a single source. ❌
+  Dijkstra’s (O((V + E) log V)) → Best for non-negative weights! ✅
+  Prim’s (O(E log V)) → Finds Minimum Spanning Tree (MST), not shortest path. ❌
+
+********************************************************************************************************************************************************************
+
+3) Alice is developing a text compression algorithm to reduce file sizes for a messaging app. She needs a way to assign shorter binary codes to frequently occurring 
+   characters and longer codes to rare characters, ensuring no two codes overlap.
+
+  Which algorithm should Alice use to achieve optimal compression?
+  1) Dijkstra’s Algorithm
+  2) Huffman Encoding
+  3) Kruskal’s Algorithm
+  4) LZW Compression
+
+  correct --> 2) Huffman Encoding
+  
+  Explaination -->
+
+  Recognize the best-known algorithms for compression:
+
+    Dijkstra’s Algorithm → Used for shortest path, NOT compression. ❌
+    Huffman Encoding → Used in lossless compression, exactly fits the requirement! ✅
+    Kruskal’s Algorithm → Used for Minimum Spanning Tree (MST), unrelated to compression. ❌
+    LZW Compression → Used in file compression (like GIFs) but doesn’t assign variable-length codes based on frequency. ❌
+  
+    Final Answer → ✅ Huffman Encoding (Option 2)
+  
+    Time Complexity: O(n log n) using a priority queue (min-heap).
+  
+    Mental Shortcut:
+    Huffman = Text compression ✅
+    Dijkstra/Kruskal = Graph algorithms ❌
+    LZW = Dictionary-based compression (not frequency-based) ❌
+
+********************************************************************************************************************************************************************
+
+4) David is a stock trader who wants to maximize profit by buying and selling stocks. He can buy on one day and sell on a later day, but he can only complete one   
+   transaction (buy once, sell once).
+
+  Which approach will help him find the maximum profit efficiently?
+  1) Brute Force (Check all pairs) - O(N²)
+  2) Sorting the array - O(N log N)
+  3) Using a single pass (tracking min price & max profit) - O(N)
+  4) Using a Queue for tracking stock prices - O(N log N)
+
+  Correct --> 3) Using a single pass (tracking min price & max profit) - O(N)
+
+  Explaination -->
+  
+  Evaluate possible approaches:
+  
+    Brute Force (O(N²)) → Check all pairs (slow, unnecessary). ❌
+    Sorting (O(N log N)) → Sorting changes the order, making it useless. ❌
+    Single Pass (O(N)) → Track min price while iterating, update max profit. ✅
+    Queue (O(N log N)) → No need for additional data structures. ❌
+
+  ********************************************************************************************************************************************************************
+  
+5) Consider the following C++ program:
+
+  #include
+  using namespace std;
+  
+  int mystery(int n) {
+    if (n <= 0) return 0;
+    return (n % 2) + 10 * mystery(n / 2);
+  }
+  
+  int main() {
+    cout << mystery(19);
+    return 0;
+  }
+  
+  1) 10011
+  2) 19
+  3) 101
+  4) 10010
+
+  correct --> 1) 10011
+    
+********************************************************************************************************************************************************************
+
+6) Consider the following C++ program:
+
+  #include
+  using namespace std;
+  
+  int main() {
+  int arr[] = {5, 7, 5, 7, 3, 9, 3};
+  int res = 0;
+  for (int x : arr) {
+  res ^= x;
+  }
+  cout << res;
+  return 0;
+  }
+
+  1) 3
+  2) 9
+  3) 5
+  4) 7
+
+  correct --> 2) 9
+
+    ********************************************************************************************************************************************************************
+
+7) Consider the following C++ program:
+
+  #include
+  #include
+  using namespace std;
+  
+  int main() {
+    priority_queue pq;
+    int arr[] = {7, 10, 4, 3, 20, 15};
+    int k = 3;
+    
+    for (int x : arr) {
+      pq.push(x);
+      if (pq.size() > k) pq.pop();
+    }
+    
+    cout << pq.top();
+    return 0;
+  }
+
+  1) 4
+  2) 7
+  3) 10
+  4) 15
+
+  correct --> 3) 10
+
+  Explaination -
+
+    ### Priority Queue (Max-Heap) for k-th Smallest Element
+    
+    #### Theory:
+    - A **priority queue** is a special type of queue where elements are stored based on priority.
+    - In C++, `priority_queue<int>` is by default a **max-heap**, meaning the largest element is always at the top.
+    - To find the **k-th smallest element**, we maintain a **max-heap of size `k`**.
+    - The **top of the heap (`pq.top()`)** will always be the **largest of those k elements**, which is the **k-th smallest element overall**.
+    - This method runs in **O(N log k)** time, much faster than sorting (`O(N log N)`).
+    
+    
+    ### Example:
+    #### Find the 3rd smallest element in the array:
+    int arr[] = {7, 10, 4, 3, 20, 15}; int k = 3;
+
+    We insert elements into a **max-heap**, keeping only `k = 3` elements.
+
+    #### Step-by-step execution:
+    
+    | Step | Inserted Element| Heap Content (`priority_queue` - Max Heap) |     Action Taken      | `pq.top()`  |
+    |------|-----------------|--------------------------------------------|-----------------------|-------------|
+    | 1    | `7`             | `{7}`                                      | -                     | `7`         |
+    | 2    | `10`            | `{10, 7}`                                  | -                     | `10`        |
+    | 3    | `4`             | `{10, 7, 4}`                               | -                     | `10`        |
+    | 4    | `3`             | `{10, 7, 4, 3}`                            | Remove `10` (largest) | `{7, 4, 3}` | `7` |
+    | 5    | `20`            | `{20, 7, 4, 3}`                            | Remove `20` (largest) | `{7, 4, 3}` | `7` |
+    | 6    | `15`            | `{15, 7, 4, 3}`                            | Remove `15` (largest) | `{10, 7, 4}`| `10`|
+      
+    
+    ✅ **Final heap:** `{10, 7, 4}`  
+    ✅ **pq.top() = 10 (Answer: 3rd smallest element)**
+    
+    ---
+    
+    ### Key Takeaways:
+    - **Max-Heap (`priority_queue<int>`) helps in finding the k-th smallest element efficiently.**
+    - **pq.top() gives the k-th smallest element when maintaining a heap of size `k`.**
+    - **Time Complexity:** `O(N log k)` (much better than sorting `O(N log N)`).  
+    
+********************************************************************************************************************************************************************
+
+8) Consider the following C++ program:
+
+  #include
+  #include
+  using namespace std;
+  
+  bool dfs(int node, int parent, vector> &graph, vector &visited) {
+    visited[node] = true;
+    for (int neighbor : graph[node]) {
+      if (!visited[neighbor]) {
+        if (dfs(neighbor, node, graph, visited)) return true;
+      } else if (neighbor != parent) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  int main() {
+    int n = 4;
+    vector> graph = {{1, 2}, {0, 2, 3}, {0, 1}, {1}};
+    vector visited(n, false);
+    
+    cout << (dfs(0, -1, graph, visited) ? "Cycle Detected" : "No Cycle");
+    return 0;
+  }
+
+  1) Cycle Detected
+  2) No Cycle
+  3) Compilation Error
+  4) Runtime Error
+
+  correct --> 1) Cycle Detected
+
+********************************************************************************************************************************************************************
+
+9) A tea-expert claims that he can easily find out whether milk or tea leaves were added first to water just by tasting the cup of tea. In order to check this         claim 10 cups of tea are prepared, 5 in one way and 5 in the other. Find the different possible ways of presenting these 10 cups to the expert
+    
+  1) 10!
+  2) 10!/(5!)^2
+  3) 300
+  4) 240
+
+  correct --> 2) 10!/(5!)^2
+
+  Explaination -
+
+    Since we have two groups of identical items, the number of unique arrangements is given by the formula:
+
+    10!/5!×5!
+​
+ 
+    This formula accounts for the repeated cups (since swapping two identical cups does not create a new arrangement).
+
+********************************************************************************************************************************************************************
+
+10) Read the passage below and answer the question: "Effective leadership is not just about making decisions; it is about inspiring and guiding a team toward a common goal. Strong leaders communicate a clear vision, foster collaboration, and empower their teams to take ownership of their work. They understand the importance of adaptability in an ever-changing business landscape. While some believe leadership is an inborn trait, many argue that it can be developed through experience, training, and self-awareness." According to the passage, which of the following is a key characteristic of effective leadership?
+  
+  1) A leader must always be the smartest person in the room.
+  2) Leadership is only about making decisions, not guiding others.
+  3) Effective leaders empower their teams and adapt to change.
+  4) Strong leaders must always follow rigid, predefined strategies.
+
+  correct --> 3) Effective leaders empower their teams and adapt to change.
+
+********************************************************************************************************************************************************************
